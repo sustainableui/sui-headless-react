@@ -113,17 +113,25 @@ function useSui(config) {
   useGridCarbonIntensity(determineDisplayModeFromGridCarbonIntensity);
 
   return {
-    ...state,
-    isPersonalizationInProgress: !state.displayMode,
-    onPersonalizationCancel: () => selectDisplayMode(config.displayModes.Moderate),
-    onDisplayModeSelect: selectDisplayMode,
+    state: {
+      ...state,
+      isPersonalizationInProgress: !state.displayMode,
+    },
+    handlers: {
+      onPersonalizationCancel: () => selectDisplayMode(config.displayModes.Moderate),
+      onDisplayModeSelect: selectDisplayMode,
+    },
     config,
   };
 }
 
 function MyApp({ Component, pageProps }) {
   const sui = useSui(SuiConfig);
-  const { isPersonalizationInProgress, onPersonalizationCancel, config } = sui;
+  const {
+    state: { isPersonalizationInProgress },
+    handlers: { onPersonalizationCancel },
+    config,
+  } = sui;
 
   if (isPersonalizationInProgress)
     return (
