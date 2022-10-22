@@ -113,7 +113,7 @@ function useSui(config) {
   useGridCarbonIntensity(determineDisplayModeFromGridCarbonIntensity);
 
   return {
-    displayMode: state.displayMode,
+    ...state,
     isPersonalizationInProgress: !state.displayMode,
     onPersonalizationCancel: () => selectDisplayMode(config.displayModes.Moderate),
     onDisplayModeSelect: selectDisplayMode,
