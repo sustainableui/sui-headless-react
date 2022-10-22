@@ -16,6 +16,7 @@ const SuiConfig = {
     [SuiDisplayModes.Moderate]: 150,
     [SuiDisplayModes.High]: 0,
   },
+  displayModes: SuiDisplayModes,
   personalizationTimeoutLimit: 8000,
   userControl: true,
   gracefulDegradationTheme: {
@@ -33,9 +34,6 @@ const SuiConfig = {
       [SuiDisplayModes.Low]: 1,
       [SuiDisplayModes.Moderate]: 2,
       [SuiDisplayModes.High]: 3,
-    },
-    button: {
-      [SuiDisplayModes.High]: 1,
     },
   },
 };
@@ -92,11 +90,11 @@ function useGridCarbonIntensity(determineDisplayModeFromGridCarbonIntensity) {
   }, [determineDisplayModeFromGridCarbonIntensity]);
 }
 
-function useSui() {
+function useSui(config) {
   const [state, dispatch] = useReducer(SuiReducer, SuiReducerInitialState);
 
-  const selectModerateDisplayMode = useCallback(function () {
-    dispatch({ type: SuiReducerActionTypes.SelectDisplayMode, payload: SuiDisplayModes.Moderate });
+  const selectDisplayMode = useCallback(function (displayMode) {
+    dispatch({ type: SuiReducerActionTypes.SelectDisplayMode, payload: displayMode });
   }, []);
 
   const determineDisplayModeFromGridCarbonIntensity = useCallback(function (gridCarbonIntensity) {
@@ -108,13 +106,14 @@ function useSui() {
   return {
     displayMode: state.displayMode,
     isPersonalizationInProgress: !state.displayMode,
-    onPersonalizationCancel: selectModerateDisplayMode,
+    onPersonalizationCancel: () => selectDisplayMode(config.displayModes.Moderate),
+    onDisplayModeSelect: selectDisplayMode,
     config: SuiConfig,
   };
 }
 
 function MyApp({ Component, pageProps }) {
-  const sui = useSui();
+  const sui = useSui(SuiConfig);
   const { isPersonalizationInProgress, onPersonalizationCancel, config } = sui;
 
   if (isPersonalizationInProgress)
