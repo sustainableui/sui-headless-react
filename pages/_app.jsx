@@ -117,7 +117,7 @@ function useSui(config) {
     isPersonalizationInProgress: !state.displayMode,
     onPersonalizationCancel: () => selectDisplayMode(config.displayModes.Moderate),
     onDisplayModeSelect: selectDisplayMode,
-    config: SuiConfig,
+    config,
   };
 }
 
