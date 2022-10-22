@@ -39,9 +39,9 @@ async function handler(req, res) {
 
   if (gridIntensityResponse.status === 200) {
     const value = await gridIntensityResponse.json();
-    res.status(200).json({ value: value[0].rating });
+    res.status(200).json({ value: value[0].rating, location: closestAzureRegion });
   } else {
-    res.status(200).json({ value: null });
+    res.status(200).json({ value: null, location: null });
   }
 }
 

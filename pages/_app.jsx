@@ -40,6 +40,10 @@ const SuiConfig = {
 
 const SuiReducerInitialState = {
   displayMode: null,
+  gridCarbonIntensity: {
+    value: null,
+    location: null,
+  },
 };
 
 const SuiReducerActionTypes = {
@@ -52,19 +56,21 @@ function selectDisplayMode(state, newDisplayMode) {
 }
 
 function determineDisplayModeFromGridCarbonIntensity(state, gridCarbonIntensity) {
-  if (gridCarbonIntensity > SuiConfig.thresholds[SuiDisplayModes.Low])
+  if (gridCarbonIntensity.value > SuiConfig.thresholds[SuiDisplayModes.Low])
     return {
       ...state,
       displayMode: SuiDisplayModes.Low,
+      gridCarbonIntensity,
     };
 
-  if (gridCarbonIntensity > SuiConfig.thresholds[SuiDisplayModes.Moderate])
+  if (gridCarbonIntensity.value > SuiConfig.thresholds[SuiDisplayModes.Moderate])
     return {
       ...state,
       displayMode: SuiDisplayModes.Moderate,
+      gridCarbonIntensity,
     };
 
-  return { ...state, displayMode: SuiDisplayModes.High };
+  return { ...state, displayMode: SuiDisplayModes.High, gridCarbonIntensity };
 }
 
 function SuiReducer(state, action) {
@@ -82,10 +88,10 @@ function useGridCarbonIntensity(determineDisplayModeFromGridCarbonIntensity) {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async ({ coords }) => {
       const gridCarbonIntensityResponse = await fetch(
-        `/api/grid-intensity?lat=${coords.latitude}&lon=${coords.longitude}`,
+        `/api/grid-carbon-intensity?lat=${coords.latitude}&lon=${coords.longitude}`,
       );
       const gridCarbonIntensity = await gridCarbonIntensityResponse.json();
-      determineDisplayModeFromGridCarbonIntensity(gridCarbonIntensity.value);
+      determineDisplayModeFromGridCarbonIntensity(gridCarbonIntensity);
     });
   }, [determineDisplayModeFromGridCarbonIntensity]);
 }
@@ -98,7 +104,10 @@ function useSui(config) {
   }, []);
 
   const determineDisplayModeFromGridCarbonIntensity = useCallback(function (gridCarbonIntensity) {
-    dispatch({ type: SuiReducerActionTypes.DetermineDisplayModeFromGridCarbonIntensity, payload: gridCarbonIntensity });
+    dispatch({
+      type: SuiReducerActionTypes.DetermineDisplayModeFromGridCarbonIntensity,
+      payload: gridCarbonIntensity,
+    });
   }, []);
 
   useGridCarbonIntensity(determineDisplayModeFromGridCarbonIntensity);
