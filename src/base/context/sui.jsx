@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 const SuiContext = React.createContext(undefined);
-SuiContext.displayName = 'SUI Context';
+SuiContext.displayName = 'SUIContext';
 
 function useSuiContext() {
   return useContext(SuiContext);
