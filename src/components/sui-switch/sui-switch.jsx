@@ -2,7 +2,7 @@ import { useSuiContext } from '../../base/context/sui';
 
 function SuiSwitch() {
   const {
-    onDisplayModeSelect,
+    handlers: { onDisplayModeSelect },
     config: { userControl, displayModes },
   } = useSuiContext();
 
