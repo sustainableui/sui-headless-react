@@ -1,4 +1,5 @@
 import { useSuiContext } from '../../base/context/sui';
+import { SuiDisplayModes } from '../../../pages/_app';
 import s from './sui-switch.module.css';
 
 function SuiSwitch() {
@@ -7,7 +8,7 @@ function SuiSwitch() {
     state: { displayMode: activeDisplayMode, config },
   } = useSuiContext();
 
-  const { userControl, displayModes } = config;
+  const { userControl } = config;
 
   function handleClick(displayMode) {
     return event => {
@@ -20,8 +21,8 @@ function SuiSwitch() {
 
   return (
     <div className={s.container}>
-      {Object.keys(displayModes).map(displayModeKey => {
-        const displayMode = displayModes[displayModeKey];
+      {Object.keys(SuiDisplayModes).map(displayModeKey => {
+        const displayMode = SuiDisplayModes[displayModeKey];
         return (
           <button key={displayMode} disabled={displayMode === activeDisplayMode} onClick={handleClick(displayMode)}>
             {displayMode}

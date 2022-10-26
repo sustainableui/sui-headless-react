@@ -3,31 +3,37 @@ import { SuiContext } from '../src/base/context/sui';
 import SuiLocalizationLoader from '../src/components/sui-localization-loader';
 import SuiSwitch from '../src/components/sui-switch';
 
-const SuiDisplayModes = {
-  Low: 'low',
-  Moderate: 'moderate',
-  High: 'high',
-};
+export enum SuiDisplayModes {
+  Low = 'Low',
+  Moderate = 'Moderate',
+  High = 'High',
+}
 
-const SuiLocalizationStatus = {
-  InProgress: 'in-progress',
-  Success: 'success',
-  Failure: 'failure',
-  Cancelled: 'cancelled',
-};
+enum SuiLocalizationStatus {
+  InProgress,
+  Success,
+  Failure,
+  Cancelled,
+}
 
-const SuiConfig = {
+enum SuiReducerActionTypes {
+  SelectDisplayMode,
+  StartLocalization,
+  CancelLocalization,
+  DetermineDisplayMode,
+}
+
+const SUI_CONFIG = {
   thresholds: {
     [SuiDisplayModes.Low]: 350,
     [SuiDisplayModes.Moderate]: 150,
     [SuiDisplayModes.High]: 0,
   },
-  displayModes: SuiDisplayModes,
   locationTimeout: 8000,
   userControl: true,
 };
 
-const SuiReducerInitialState = {
+const SUI_INITIAL_STATE = {
   displayMode: null,
   gridCarbonIntensityData: {
     value: null,
@@ -35,13 +41,6 @@ const SuiReducerInitialState = {
   },
   localizationStatus: null,
   localizationError: null,
-};
-
-const SuiReducerActionTypes = {
-  SelectDisplayMode: 'select-display-mode',
-  StartLocalization: 'start-localization',
-  CancelLocalization: 'cancel-localization',
-  DetermineDisplayMode: 'determine-display-mode',
 };
 
 function selectDisplayMode(state, newDisplayMode) {
@@ -65,7 +64,7 @@ function cancelLocalization(state, reason) {
 }
 
 function determineDisplayMode(state, gridCarbonIntensityData) {
-  if (gridCarbonIntensityData.value > state.config.thresholds[SuiDisplayModes.Low])
+  if (gridCarbonIntensityData.value > state.config.thresholds[SuiDisplayModes.Low]) {
     return {
       ...state,
       displayMode: SuiDisplayModes.Low,
@@ -73,8 +72,9 @@ function determineDisplayMode(state, gridCarbonIntensityData) {
       localizationStatus: SuiLocalizationStatus.Success,
       localizationError: null,
     };
+  }
 
-  if (gridCarbonIntensityData.value > state.config.thresholds[SuiDisplayModes.Moderate])
+  if (gridCarbonIntensityData.value > state.config.thresholds[SuiDisplayModes.Moderate]) {
     return {
       ...state,
       displayMode: SuiDisplayModes.Moderate,
@@ -82,6 +82,7 @@ function determineDisplayMode(state, gridCarbonIntensityData) {
       localizationStatus: SuiLocalizationStatus.Success,
       localizationError: null,
     };
+  }
 
   return {
     ...state,
@@ -92,7 +93,7 @@ function determineDisplayMode(state, gridCarbonIntensityData) {
   };
 }
 
-function SuiReducer(state, action) {
+function suiReducer(state, action) {
   switch (action.type) {
     case SuiReducerActionTypes.SelectDisplayMode:
       return selectDisplayMode(state, action.payload);
@@ -133,7 +134,7 @@ function useGridCarbonIntensityData(startLocalization, cancelLocalization, deter
 }
 
 function useSui(config) {
-  const [state, dispatch] = useReducer(SuiReducer, SuiReducerInitialState, initialState => ({
+  const [state, dispatch] = useReducer(suiReducer, SUI_INITIAL_STATE, initialState => ({
     ...initialState,
     config,
   }));
@@ -177,14 +178,15 @@ function useSui(config) {
 }
 
 function MyApp({ Component, pageProps }) {
-  const sui = useSui(SuiConfig);
+  const sui = useSui(SUI_CONFIG);
 
-  if (sui.state.isLocalizationInProgress)
+  if (sui.state.isLocalizationInProgress) {
     return (
       <SuiContext.Provider value={sui}>
         <SuiLocalizationLoader />
       </SuiContext.Provider>
     );
+  }
 
   return (
     <SuiContext.Provider value={sui}>

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { SuiDisplayModes } from '../../../pages/_app';
 
 const SuiContext = React.createContext(undefined);
 SuiContext.displayName = 'SuiContext';
@@ -7,13 +8,13 @@ function useSuiContext() {
   return useContext(SuiContext);
 }
 
-function determineSuiComponent(components, displayMode, displayModes) {
+function determineSuiComponent(components, displayMode) {
   switch (displayMode) {
-    case displayModes.Low:
+    case SuiDisplayModes.Low:
       return components[0];
-    case displayModes.Moderate:
+    case SuiDisplayModes.Moderate:
       return components[1];
-    case displayModes.High:
+    case SuiDisplayModes.High:
       return components[2];
     default:
       return components[1];
@@ -22,10 +23,10 @@ function determineSuiComponent(components, displayMode, displayModes) {
 
 function SuiComponentWrapper({ components, ...props }) {
   const {
-    state: { displayMode, config },
+    state: { displayMode },
   } = useSuiContext();
 
-  const SuiComponent = determineSuiComponent(components, displayMode, config.displayModes);
+  const SuiComponent = determineSuiComponent(components, displayMode);
 
   return <SuiComponent {...props} />;
 }
