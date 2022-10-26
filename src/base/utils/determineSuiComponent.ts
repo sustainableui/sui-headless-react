@@ -1,6 +1,8 @@
+import React from 'react';
 import { SuiDisplayModes } from '../../../pages/_app';
+import { SuiComponents } from '../../components/sui-component/sui-component';
 
-function determineSuiComponent(components, displayMode) {
+function determineSuiComponent(components: SuiComponents, displayMode: SuiDisplayModes): React.ElementType {
   switch (displayMode) {
     case SuiDisplayModes.Low:
       return components[0];
