@@ -1,4 +1,4 @@
-import { withSui } from '../../base/context/sui';
+import withSui from '../sui-component';
 import s from './background-color.module.css';
 
 function LowBackgroundColor() {
