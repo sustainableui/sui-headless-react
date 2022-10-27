@@ -1,4 +1,4 @@
-import { useSuiContext } from '../../base/context/suiContext';
+import { useSuiContext } from '../../base/context/sui-context';
 import SuiDisplayModes from '../../base/types/suiDisplayModes';
 import s from './sui-switch.module.css';
 
