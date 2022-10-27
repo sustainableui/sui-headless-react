@@ -1,5 +1,5 @@
 import React from 'react';
-import SuiConfig from '../types/suiConfig';
+import SuiConfig from '../../base/types/suiConfig';
 
 interface SuiProviderProps {
   config?: SuiConfig;

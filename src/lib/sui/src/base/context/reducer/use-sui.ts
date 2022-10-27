@@ -1,12 +1,9 @@
 import { useCallback, useReducer } from 'react';
-import SuiConfig from '../../types/suiConfig';
-import SuiDisplayModes from '../../types/suiDisplayModes';
-import SuiGridCarbonIntensity from '../../types/suiGridCarbonIntensity';
+import { SuiConfig, SuiDisplayModes, SuiGridCarbonIntensity } from '../../types';
 import SUI_INITIAL_STATE from '../../constants/initialState';
 import { Sui } from '../sui-context.types';
 import useGridCarbonIntensity from './use-grid-carbon-intensity';
-import SuiState from './types/suiState';
-import SuiActions from './types/suiActions';
+import { SuiActions, SuiState } from './types';
 import { cancelLocalization, determineDisplayMode, selectDisplayMode, startLocalization } from './actions';
 
 function suiReducer(state: SuiState, action: SuiActions): SuiState {

@@ -1,10 +1,9 @@
 import React from 'react';
-import SuiLocalizationLoader from '../../components/sui-localization-loader';
-import SuiSwitch from '../../components/sui-switch';
-import SuiConfig from '../types/suiConfig';
-import SuiDisplayModes from '../types/suiDisplayModes';
-import useSui from './reducer';
-import { SuiContext } from './sui-context';
+import SuiLocalizationLoader from '../sui-localization-loader';
+import SuiSwitch from '../sui-switch';
+import { SuiConfig, SuiDisplayModes } from '../../base/types';
+import useSui from '../../base/context/reducer';
+import { SuiContext } from '../../base/context/sui-context';
 import { SuiProviderProps } from './sui-provider.types';
 
 const SUI_DEFAULT_CONFIG: SuiConfig = {

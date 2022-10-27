@@ -1,4 +1,4 @@
-import SuiProvider from '../src/lib/sui/src/base/context/sui-provider';
+import SuiProvider from '../src/lib/sui';
 
 function MyApp({ Component, pageProps }) {
   return (

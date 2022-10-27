@@ -4,7 +4,7 @@ import { Sui } from './sui-context.types';
 const SuiContext = React.createContext<Sui>(undefined);
 SuiContext.displayName = 'SuiContext';
 
-function useSuiContext() {
+function useSuiContext(): Sui {
   return useContext(SuiContext);
 }
 
