@@ -2,45 +2,31 @@ import { useCallback, useEffect, useReducer } from 'react';
 import { SuiContext } from '../src/base/context/sui';
 import SuiLocalizationLoader from '../src/components/sui-localization-loader';
 import SuiSwitch from '../src/components/sui-switch';
+import SuiDisplayModes from '../src/lib/sui/types/displayModes';
+import SuiConfig from '../src/lib/sui/types/config';
+import SuiState, { SuiLocalizationStatus } from '../src/lib/sui/reducer/types/state';
+import SuiReducerActionTypes from '../src/lib/sui/reducer/types/actionTypes';
 
-export enum SuiDisplayModes {
-  Low = 'Low',
-  Moderate = 'Moderate',
-  High = 'High',
-}
-
-enum SuiLocalizationStatus {
-  InProgress,
-  Success,
-  Failure,
-  Cancelled,
-}
-
-enum SuiReducerActionTypes {
-  SelectDisplayMode,
-  StartLocalization,
-  CancelLocalization,
-  DetermineDisplayMode,
-}
-
-const SUI_CONFIG = {
-  thresholds: {
+const SUI_CONFIG: SuiConfig = {
+  gracefulDegradationThresholds: {
     [SuiDisplayModes.Low]: 350,
     [SuiDisplayModes.Moderate]: 150,
     [SuiDisplayModes.High]: 0,
   },
-  locationTimeout: 8000,
-  userControl: true,
+  localizationTimeout: 8000,
+  userControlAllowed: true,
 };
 
-const SUI_INITIAL_STATE = {
+const SUI_INITIAL_STATE: SuiState = {
   displayMode: null,
-  gridCarbonIntensityData: {
+  localization: {
+    status: null,
+    error: null,
+  },
+  gridCarbonIntensity: {
     value: null,
     measurementRegion: null,
   },
-  localizationStatus: null,
-  localizationError: null,
 };
 
 function selectDisplayMode(state, newDisplayMode) {
