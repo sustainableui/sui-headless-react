@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useReducer } from 'react';
-import { SuiContext } from '../src/base/context/sui';
-import SuiLocalizationLoader from '../src/components/sui-localization-loader';
-import SuiSwitch from '../src/components/sui-switch';
-import SuiDisplayModes from '../src/lib/sui/types/displayModes';
-import SuiConfig from '../src/lib/sui/types/config';
-import SuiState from '../src/lib/sui/reducer/types/state';
-import Actions from '../src/lib/sui/reducer/types/actions';
-import GridCarbonIntensity from '../src/lib/sui/types/gridCarbonIntensity';
+import { SuiContext } from '../src/lib/sui/src/base/context/suiContext';
+import SuiLocalizationLoader from '../src/lib/sui/src/components/sui-localization-loader';
+import SuiSwitch from '../src/lib/sui/src/components/sui-switch';
+import SuiDisplayModes from '../src/lib/sui/src/base/types/suiDisplayModes';
+import SuiConfig from '../src/lib/sui/src/base/types/suiConfig';
+import SuiState from '../src/lib/sui/src/base/context/reducer/types/suiState';
+import SuiActions from '../src/lib/sui/src/base/context/reducer/types/suiActions';
+import SuiGridCarbonIntensity from '../src/lib/sui/src/base/types/suiGridCarbonIntensity';
 
 const SUI_CONFIG: SuiConfig = {
   gracefulDegradationThresholds: {
@@ -59,7 +59,7 @@ function cancelLocalization(state: SuiState, reason?: string): SuiState {
   };
 }
 
-function determineDisplayMode(state: SuiState, gridCarbonIntensity: GridCarbonIntensity): SuiState {
+function determineDisplayMode(state: SuiState, gridCarbonIntensity: SuiGridCarbonIntensity): SuiState {
   if (gridCarbonIntensity.value > state.config.gracefulDegradationThresholds[SuiDisplayModes.Low]) {
     return {
       ...state,
@@ -95,7 +95,7 @@ function determineDisplayMode(state: SuiState, gridCarbonIntensity: GridCarbonIn
   };
 }
 
-function suiReducer(state: SuiState, action: Actions): SuiState {
+function suiReducer(state: SuiState, action: SuiActions): SuiState {
   switch (action.type) {
     case 'select-display-mode':
       return selectDisplayMode(state, action.payload);
@@ -162,7 +162,7 @@ function useSui(config: SuiConfig) {
     });
   }, []);
 
-  const determineDisplayMode = useCallback(function (gridCarbonIntensity: GridCarbonIntensity) {
+  const determineDisplayMode = useCallback(function (gridCarbonIntensity: SuiGridCarbonIntensity) {
     dispatch({
       type: 'determine-display-mode',
       payload: gridCarbonIntensity,

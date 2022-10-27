@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSuiContext } from '../../base/context/sui';
+import { useSuiContext } from '../../base/context/suiContext';
 import determineSuiComponent from '../../base/utils/determineSuiComponent';
 
 export type SuiComponents = [React.ElementType, React.ElementType, React.ElementType];

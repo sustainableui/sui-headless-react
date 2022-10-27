@@ -1,4 +1,4 @@
-import SuiDisplayModes from './displayModes';
+import SuiDisplayModes from './suiDisplayModes';
 
 interface SuiConfig {
   gracefulDegradationThresholds: {

@@ -1,5 +1,5 @@
-import { useSuiContext } from '../../base/context/sui';
-import SuiDisplayModes from '../../lib/sui/types/displayModes';
+import { useSuiContext } from '../../base/context/suiContext';
+import SuiDisplayModes from '../../base/types/suiDisplayModes';
 import s from './sui-switch.module.css';
 
 function SuiSwitch() {

@@ -1,4 +1,4 @@
-import { useSuiContext } from '../../base/context/sui';
+import { useSuiContext } from '../../base/context/suiContext';
 
 function SuiLocalizationLoader() {
   const {

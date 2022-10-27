@@ -1,6 +1,6 @@
 import React from 'react';
 import { SuiComponents } from '../../components/sui-component/sui-component';
-import SuiDisplayModes from '../../lib/sui/types/displayModes';
+import SuiDisplayModes from '../types/suiDisplayModes';
 
 function determineSuiComponent(components: SuiComponents, displayMode: SuiDisplayModes): React.ElementType {
   switch (displayMode) {
