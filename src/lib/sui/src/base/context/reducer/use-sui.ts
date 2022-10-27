@@ -8,6 +8,14 @@ import SuiState from './types/suiState';
 import SuiActions from './types/suiActions';
 import { cancelLocalization, determineDisplayMode, selectDisplayMode, startLocalization } from './actions';
 
+interface Sui {
+  state: SuiState;
+  handlers: {
+    onLocalizationCancel: () => void;
+    onDisplayModeSelect: (displayMode: SuiDisplayModes) => void;
+  };
+}
+
 function suiReducer(state: SuiState, action: SuiActions): SuiState {
   switch (action.type) {
     case 'select-display-mode':
@@ -23,13 +31,16 @@ function suiReducer(state: SuiState, action: SuiActions): SuiState {
   }
 }
 
-function useSui(config: SuiConfig) {
+function useSui(customConfig: SuiConfig, defaultConfig: SuiConfig): Sui {
   const [state, dispatch] = useReducer(
     suiReducer,
     SUI_INITIAL_STATE,
     (initialState: SuiState): SuiState => ({
       ...initialState,
-      config,
+      config: {
+        ...defaultConfig,
+        ...customConfig,
+      },
     }),
   );
 

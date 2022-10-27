@@ -8,6 +8,7 @@ interface SuiState {
   localization: SuiLocalization;
   gridCarbonIntensity: SuiGridCarbonIntensity;
   config: SuiConfig;
+  isLocalizationInProgress: boolean;
 }
 
 export default SuiState;
