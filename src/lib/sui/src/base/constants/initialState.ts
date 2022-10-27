@@ -11,6 +11,7 @@ const SUI_INITIAL_STATE: SuiState = {
     measurementRegion: null,
   },
   config: null,
+  isLocalizationInProgress: false,
 };
 
 export default SUI_INITIAL_STATE;

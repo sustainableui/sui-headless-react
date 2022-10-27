@@ -3,18 +3,11 @@ import SuiConfig from '../../types/suiConfig';
 import SuiDisplayModes from '../../types/suiDisplayModes';
 import SuiGridCarbonIntensity from '../../types/suiGridCarbonIntensity';
 import SUI_INITIAL_STATE from '../../constants/initialState';
+import { Sui } from '../sui-context.types';
 import useGridCarbonIntensity from './use-grid-carbon-intensity';
 import SuiState from './types/suiState';
 import SuiActions from './types/suiActions';
 import { cancelLocalization, determineDisplayMode, selectDisplayMode, startLocalization } from './actions';
-
-interface Sui {
-  state: SuiState;
-  handlers: {
-    onLocalizationCancel: () => void;
-    onDisplayModeSelect: (displayMode: SuiDisplayModes) => void;
-  };
-}
 
 function suiReducer(state: SuiState, action: SuiActions): SuiState {
   switch (action.type) {
@@ -31,17 +24,19 @@ function suiReducer(state: SuiState, action: SuiActions): SuiState {
   }
 }
 
+function suiReducerInit(initialState: SuiState, customConfig: SuiConfig, defaultConfig: SuiConfig): SuiState {
+  return {
+    ...initialState,
+    config: {
+      ...defaultConfig,
+      ...customConfig,
+    },
+  };
+}
+
 function useSui(customConfig: SuiConfig, defaultConfig: SuiConfig): Sui {
-  const [state, dispatch] = useReducer(
-    suiReducer,
-    SUI_INITIAL_STATE,
-    (initialState: SuiState): SuiState => ({
-      ...initialState,
-      config: {
-        ...defaultConfig,
-        ...customConfig,
-      },
-    }),
+  const [state, dispatch] = useReducer(suiReducer, SUI_INITIAL_STATE, initialState =>
+    suiReducerInit(initialState, customConfig, defaultConfig),
   );
 
   const selectDisplayMode = useCallback(function (displayMode: SuiDisplayModes) {

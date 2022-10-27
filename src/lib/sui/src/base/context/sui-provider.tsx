@@ -5,11 +5,7 @@ import SuiConfig from '../types/suiConfig';
 import SuiDisplayModes from '../types/suiDisplayModes';
 import useSui from './reducer';
 import { SuiContext } from './sui-context';
-
-interface SuiProviderProps {
-  config?: SuiConfig;
-  children: React.ReactNode | React.ReactNode[];
-}
+import { SuiProviderProps } from './sui-provider.types';
 
 const SUI_DEFAULT_CONFIG: SuiConfig = {
   gracefulDegradationThresholds: {
