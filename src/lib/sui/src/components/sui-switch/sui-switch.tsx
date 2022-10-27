@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSuiContext } from '../../base/context/sui-context';
 import SuiDisplayModes from '../../base/types/suiDisplayModes';
 import s from './sui-switch.module.css';
@@ -10,8 +11,8 @@ function SuiSwitch() {
 
   const { userControlAllowed } = config;
 
-  function handleClick(displayMode) {
-    return event => {
+  function handleClick(displayMode: SuiDisplayModes) {
+    return (event: React.MouseEvent) => {
       event.preventDefault();
       onDisplayModeSelect(displayMode);
     };

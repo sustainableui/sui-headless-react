@@ -5,7 +5,7 @@ const SuiContext = React.createContext<Sui>(undefined);
 SuiContext.displayName = 'SuiContext';
 
 function useSuiContext(): Sui {
-  return useContext(SuiContext);
+  return useContext<Sui>(SuiContext);
 }
 
 export { SuiContext, useSuiContext };

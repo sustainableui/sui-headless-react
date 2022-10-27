@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSuiContext } from '../../base/context/sui-context';
 
 function SuiLocalizationLoader() {
@@ -5,7 +6,7 @@ function SuiLocalizationLoader() {
     handlers: { onLocalizationCancel },
   } = useSuiContext();
 
-  function handleClick(event) {
+  function handleClick(event: React.MouseEvent) {
     event.preventDefault();
     onLocalizationCancel();
   }
