@@ -1,24 +1,15 @@
-import SuiDisplayModes from '../../types/displayModes';
+import DisplayModes from '../../types/displayModes';
+import Config from '../../types/config';
+import GridCarbonIntensity from '../../types/gridCarbonIntensity';
 
-enum SuiLocalizationStatus {
-  InProgress,
-  Success,
-  Failure,
-  Cancelled,
-}
-
-interface SuiState {
-  displayMode?: SuiDisplayModes;
+interface State {
+  displayMode?: DisplayModes;
   localization: {
-    status: SuiLocalizationStatus | null;
-    error: string | null;
+    status: 'in-progress' | 'success' | 'failure' | 'cancelled';
+    error: string;
   };
-  gridCarbonIntensity: {
-    value: number | null;
-    measurementRegion: string | null;
-  };
+  gridCarbonIntensity: GridCarbonIntensity;
+  config: Config;
 }
 
-export { SuiLocalizationStatus };
-
-export default SuiState;
+export default State;

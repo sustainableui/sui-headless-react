@@ -8,7 +8,7 @@ function SuiSwitch() {
     state: { displayMode: activeDisplayMode, config },
   } = useSuiContext();
 
-  const { userControl } = config;
+  const { userControlAllowed } = config;
 
   function handleClick(displayMode) {
     return event => {
@@ -17,7 +17,7 @@ function SuiSwitch() {
     };
   }
 
-  if (!userControl) return null;
+  if (!userControlAllowed) return null;
 
   return (
     <div className={s.container}>
