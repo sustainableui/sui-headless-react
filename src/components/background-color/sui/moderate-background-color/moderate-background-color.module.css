@@ -1,0 +1,9 @@
+.moderateContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    background-color: orange;
+}

@@ -1,16 +1,16 @@
+import dynamic from 'next/dynamic';
 import { withSui } from '../../lib/sui';
-import s from './background-color.module.css';
 
-function LowBackgroundColor() {
-  return <main className={`${s.container} ${s.lowContainer}`} />;
-}
+const LowBackgroundColor = dynamic(() => import('./sui/low-background-color'), {
+  ssr: false,
+});
 
-function ModerateBackgroundColor() {
-  return <main className={`${s.container} ${s.moderateContainer}`} />;
-}
+const ModerateBackgroundColor = dynamic(() => import('./sui/moderate-background-color'), {
+  ssr: false,
+});
 
-function HighBackgroundColor() {
-  return <main className={`${s.container} ${s.highContainer}`} />;
-}
+const HighBackgroundColor = dynamic(() => import('./sui/high-background-color'), {
+  ssr: false,
+});
 
 export default withSui([LowBackgroundColor, ModerateBackgroundColor, HighBackgroundColor]);
