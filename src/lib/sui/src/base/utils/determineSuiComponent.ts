@@ -1,5 +1,5 @@
 import React from 'react';
-import { SuiComponents } from '../../components/sui-component/sui-component';
+import { SuiComponents } from '../../components/sui-component/sui-component.types';
 import SuiDisplayModes from '../types/suiDisplayModes';
 
 function determineSuiComponent(components: SuiComponents, displayMode: SuiDisplayModes): React.ElementType {
