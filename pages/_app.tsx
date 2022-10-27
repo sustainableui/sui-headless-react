@@ -1,9 +1,6 @@
-import { SuiContext } from '../src/lib/sui/src/base/context/sui-context';
-import SuiLocalizationLoader from '../src/lib/sui/src/components/sui-localization-loader';
-import SuiSwitch from '../src/lib/sui/src/components/sui-switch';
 import SuiDisplayModes from '../src/lib/sui/src/base/types/suiDisplayModes';
 import SuiConfig from '../src/lib/sui/src/base/types/suiConfig';
-import useSui from '../src/lib/sui/src/base/context/reducer';
+import SuiProvider from '../src/lib/sui/src/base/context/sui-provider';
 
 const SUI_CONFIG: SuiConfig = {
   gracefulDegradationThresholds: {
@@ -16,21 +13,10 @@ const SUI_CONFIG: SuiConfig = {
 };
 
 function MyApp({ Component, pageProps }) {
-  const sui = useSui(SUI_CONFIG);
-
-  if (sui.state.isLocalizationInProgress) {
-    return (
-      <SuiContext.Provider value={sui}>
-        <SuiLocalizationLoader />
-      </SuiContext.Provider>
-    );
-  }
-
   return (
-    <SuiContext.Provider value={sui}>
-      <SuiSwitch />
+    <SuiProvider config={SUI_CONFIG}>
       <Component {...pageProps} />
-    </SuiContext.Provider>
+    </SuiProvider>
   );
 }
 
