@@ -1,18 +1,13 @@
-import { useCallback, useEffect, useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 import { SuiApi, SuiConfig, SuiCustomConfig, SuiDisplayModes, SuiGridCarbonIntensity } from '../../types';
 import { initialState as SUI_INITIAL_STATE } from '../../constants';
 import { Sui } from '../sui-context.types';
-import {
-  getLocalStorageDisplayMode,
-  getLocalStorageLocalizationTimestamp,
-  isDisplayModeStale,
-  setLocalStorageDisplayMode,
-  setLocalStorageLocalizationTimestamp,
-} from '../../utils';
+import { getLocalStorageDisplayMode, getLocalStorageLocalizationTimestamp, isDisplayModeStale } from '../../utils';
 import useGridCarbonIntensity from './use-grid-carbon-intensity';
 import { SuiActions, SuiState } from './types';
 import { cancelLocalization, determineDisplayMode, selectDisplayMode, startLocalization } from './actions';
 import { isSuiDisplayMode, isValidTimestamp } from './use-sui.types';
+import useLocalStorageSync from './use-local-storage-sync';
 
 function suiReducer(state: SuiState, action: SuiActions): SuiState {
   switch (action.type) {
@@ -94,13 +89,7 @@ function useSui(api: SuiApi, customConfig: SuiCustomConfig, defaultConfig: SuiCo
     },
   );
 
-  useEffect(() => {
-    setLocalStorageDisplayMode(state.config.localStorageId, state.displayMode);
-  }, [state.config.localStorageId, state.displayMode]);
-
-  useEffect(() => {
-    setLocalStorageLocalizationTimestamp(state.config.localStorageId);
-  }, [state.config.localStorageId, state.gridCarbonIntensity.value, state.gridCarbonIntensity.measurementRegion]);
+  useLocalStorageSync(state);
 
   return {
     state: {
