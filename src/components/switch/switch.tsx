@@ -21,7 +21,8 @@ interface SwitchProps {
 
 function Switch({ displayMode, onDisplayModeSelect }: SwitchProps) {
   function handleClick(newDisplayMode: SuiDisplayModes) {
-    return () => {
+    return event => {
+      event.preventDefault();
       onDisplayModeSelect(newDisplayMode);
     };
   }
