@@ -8,6 +8,8 @@ interface SuiConfig {
   };
   userControlAllowed: boolean;
   localizationTimeout: number;
+  displayModeTimeout: number;
+  localStorageId: string;
 }
 
 export default SuiConfig;

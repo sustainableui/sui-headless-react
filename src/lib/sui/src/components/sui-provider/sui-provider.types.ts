@@ -1,9 +1,8 @@
 import React from 'react';
-import SuiConfig from '../../base/types/suiConfig';
+import SuiOptions from '../../base/types/suiOptions';
 
-interface SuiProviderProps {
-  config?: SuiConfig;
+type SuiProviderProps = SuiOptions & {
   children: React.ReactNode | React.ReactNode[];
-}
+};
 
 export type { SuiProviderProps };

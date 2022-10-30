@@ -1,12 +1,12 @@
 import React from 'react';
-import SuiLocalizationLoader from '../sui-localization-loader';
+import SuiLoader from '../sui-loader';
 import SuiSwitch from '../sui-switch';
-import { SuiConfig, SuiDisplayModes } from '../../base/types';
 import useSui from '../../base/context/reducer';
 import { SuiContext } from '../../base/context/sui-context';
+import SuiDisplayModes from '../../base/types/suiDisplayModes';
 import { SuiProviderProps } from './sui-provider.types';
 
-const SUI_DEFAULT_CONFIG: SuiConfig = {
+const SUI_DEFAULT_CONFIG = {
   gracefulDegradationThresholds: {
     [SuiDisplayModes.Low]: 350,
     [SuiDisplayModes.Moderate]: 150,
@@ -14,15 +14,17 @@ const SUI_DEFAULT_CONFIG: SuiConfig = {
   },
   localizationTimeout: 8000,
   userControlAllowed: true,
+  displayModeTimeout: 12000,
+  localStorageId: 'sui',
 };
 
-function SuiProvider({ config: customConfig, children }: SuiProviderProps) {
-  const sui = useSui(customConfig, SUI_DEFAULT_CONFIG);
+function SuiProvider({ api, config: customConfig, children }: SuiProviderProps) {
+  const sui = useSui(api, customConfig, SUI_DEFAULT_CONFIG);
 
-  if (sui.state.isLocalizationInProgress) {
+  if (sui.state.isLoading) {
     return (
       <SuiContext.Provider value={sui}>
-        <SuiLocalizationLoader />
+        <SuiLoader />
       </SuiContext.Provider>
     );
   }

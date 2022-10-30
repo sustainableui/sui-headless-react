@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSuiContext } from '../../base/context/sui-context';
 
-function SuiLocalizationLoader() {
+function SuiLoader() {
   const {
     handlers: { onLocalizationCancel },
   } = useSuiContext();
@@ -20,4 +20,4 @@ function SuiLocalizationLoader() {
   );
 }
 
-export default SuiLocalizationLoader;
+export default SuiLoader;

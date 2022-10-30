@@ -1,10 +1,19 @@
-import { useCallback, useReducer } from 'react';
-import { SuiConfig, SuiDisplayModes, SuiGridCarbonIntensity } from '../../types';
-import SUI_INITIAL_STATE from '../../constants/initialState';
+import { Dispatch, useCallback, useReducer } from 'react';
+import { SuiApi, SuiConfig, SuiCustomConfig, SuiDisplayModes, SuiGridCarbonIntensity } from '../../types';
+import { initialState as SUI_INITIAL_STATE } from '../../constants';
 import { Sui } from '../sui-context.types';
+import {
+  getLocalStorageDisplayMode,
+  getLocalStorageLocalizationTimestamp,
+  isDisplayModeStale,
+  setLocalStorageDisplayMode,
+  setLocalStorageLocalizationTimestamp,
+} from '../../utils';
+import getDisplayModeFromGridCarbonIntensity from '../../utils/getDisplayModeFromGridCarbonIntensity';
 import useGridCarbonIntensity from './use-grid-carbon-intensity';
 import { SuiActions, SuiState } from './types';
 import { cancelLocalization, determineDisplayMode, selectDisplayMode, startLocalization } from './actions';
+import { isSuiDisplayMode, isValidTimestamp } from './use-sui.types';
 
 function suiReducer(state: SuiState, action: SuiActions): SuiState {
   switch (action.type) {
@@ -21,51 +30,123 @@ function suiReducer(state: SuiState, action: SuiActions): SuiState {
   }
 }
 
-function suiReducerInit(initialState: SuiState, customConfig: SuiConfig, defaultConfig: SuiConfig): SuiState {
+function suiReducerInit(initialState: SuiState, customConfig: SuiCustomConfig, defaultConfig: SuiConfig): SuiState {
+  const config = {
+    ...defaultConfig,
+    ...customConfig,
+  };
+
+  let displayMode = initialState.displayMode;
+
+  const localStorageLocalizationTimestamp = getLocalStorageLocalizationTimestamp(config.localStorageId);
+  const localStorageDisplayMode = getLocalStorageDisplayMode(config.localStorageId);
+
+  if (isValidTimestamp(localStorageLocalizationTimestamp) && isSuiDisplayMode(localStorageDisplayMode)) {
+    if (!isDisplayModeStale(localStorageLocalizationTimestamp, config.displayModeTimeout)) {
+      displayMode = localStorageDisplayMode;
+    }
+  }
+
   return {
-    ...initialState,
-    config: {
-      ...defaultConfig,
-      ...customConfig,
-    },
+    ...{ ...initialState, displayMode },
+    config,
   };
 }
 
-function useSui(customConfig: SuiConfig, defaultConfig: SuiConfig): Sui {
+function useSuiReducerWithLocalStorage(
+  customConfig: SuiCustomConfig,
+  defaultConfig: SuiConfig,
+): [SuiState, Dispatch<SuiActions>] {
   const [state, dispatch] = useReducer(suiReducer, SUI_INITIAL_STATE, initialState =>
     suiReducerInit(initialState, customConfig, defaultConfig),
   );
 
-  const selectDisplayMode = useCallback(function (displayMode: SuiDisplayModes) {
-    dispatch({ type: 'select-display-mode', payload: displayMode });
-  }, []);
+  const updateLocalStorage = useCallback(
+    function (action: SuiActions) {
+      switch (action.type) {
+        case 'determine-display-mode':
+          setLocalStorageDisplayMode(
+            state.config.localStorageId,
+            getDisplayModeFromGridCarbonIntensity(action.payload, state.config),
+          );
+          setLocalStorageLocalizationTimestamp(state.config.localStorageId);
+          break;
+        case 'select-display-mode':
+          setLocalStorageDisplayMode(state.config.localStorageId, action.payload);
+          break;
+        default:
+      }
+    },
+    [state.config],
+  );
 
-  const startLocalization = useCallback(function () {
-    dispatch({
-      type: 'start-localization',
-    });
-  }, []);
+  const dispatchWithLocalStorage = useCallback(
+    function (action: SuiActions) {
+      updateLocalStorage(action);
+      dispatch(action);
+    },
+    [updateLocalStorage],
+  );
 
-  const cancelLocalization = useCallback(function (reason: string = null) {
-    dispatch({
-      type: 'cancel-localization',
-      payload: reason,
-    });
-  }, []);
+  return [state, dispatchWithLocalStorage];
+}
 
-  const determineDisplayMode = useCallback(function (gridCarbonIntensity: SuiGridCarbonIntensity) {
-    dispatch({
-      type: 'determine-display-mode',
-      payload: gridCarbonIntensity,
-    });
-  }, []);
+function useSui(api: SuiApi, customConfig: SuiCustomConfig, defaultConfig: SuiConfig): Sui {
+  const [state, dispatch] = useSuiReducerWithLocalStorage(customConfig, defaultConfig);
 
-  useGridCarbonIntensity(startLocalization, cancelLocalization, determineDisplayMode, state.config.localizationTimeout);
+  const selectDisplayMode = useCallback(
+    function (displayMode: SuiDisplayModes) {
+      dispatch({ type: 'select-display-mode', payload: displayMode });
+    },
+    [dispatch],
+  );
+
+  const startLocalization = useCallback(
+    function () {
+      dispatch({
+        type: 'start-localization',
+      });
+    },
+    [dispatch],
+  );
+
+  const cancelLocalization = useCallback(
+    function (reason: string = null) {
+      dispatch({
+        type: 'cancel-localization',
+        payload: reason,
+      });
+    },
+    [dispatch],
+  );
+
+  const determineDisplayMode = useCallback(
+    function (gridCarbonIntensity: SuiGridCarbonIntensity) {
+      dispatch({
+        type: 'determine-display-mode',
+        payload: gridCarbonIntensity,
+      });
+    },
+    [dispatch],
+  );
+
+  useGridCarbonIntensity(
+    api,
+    state.displayMode !== null,
+    {
+      localizationTimeout: state.config.localizationTimeout,
+    },
+    {
+      onLocalizationStart: startLocalization,
+      onLocalizationSuccess: determineDisplayMode,
+      onLocalizationFailure: cancelLocalization,
+    },
+  );
 
   return {
     state: {
       ...state,
-      isLocalizationInProgress: state.localization.status === 'in-progress',
+      isLoading: state.displayMode === null,
     },
     handlers: {
       onLocalizationCancel: cancelLocalization,
