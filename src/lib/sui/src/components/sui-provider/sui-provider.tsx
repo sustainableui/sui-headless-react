@@ -2,6 +2,7 @@ import React from 'react';
 import useSui from '../../base/context/reducer';
 import { SuiContext } from '../../base/context/sui-context';
 import SuiDisplayModes from '../../base/types/suiDisplayModes';
+import getDisplayModeFromGridCarbonIntensity from '../../base/utils/getDisplayModeFromGridCarbonIntensity';
 import { SuiProviderProps } from './sui-provider.types';
 
 const SUI_DEFAULT_CONFIG = {
@@ -29,7 +30,7 @@ function SuiProvider({
 
   const {
     handlers: { onDisplayModeSelect, onLocalizationCancel },
-    state: { config, displayMode },
+    state: { config, displayMode, gridCarbonIntensity },
   } = sui;
 
   const { userControlAllowed } = config;
@@ -47,6 +48,8 @@ function SuiProvider({
       {userControlAllowed && SwitchComponent ? (
         <SwitchComponent
           {...switchComponentProps}
+          recommendedDisplayMode={getDisplayModeFromGridCarbonIntensity(gridCarbonIntensity, config)}
+          gridCarbonIntensity={gridCarbonIntensity}
           displayMode={displayMode}
           onDisplayModeSelect={onDisplayModeSelect}
         />

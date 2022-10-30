@@ -1,11 +1,13 @@
 import React from 'react';
-import { SuiDisplayModes, SuiOptions } from '../../base/types';
+import { SuiDisplayModes, SuiGridCarbonIntensity, SuiOptions } from '../../base/types';
 
 type SuiProviderProps = SuiOptions & {
   LoaderComponent: React.FC<Record<string, unknown> & { onLocalizationCancel: () => void }>;
   loaderComponentProps?: Record<string, unknown>;
   SwitchComponent?: React.FC<
     Record<string, unknown> & {
+      gridCarbonIntensity: SuiGridCarbonIntensity;
+      recommendedDisplayMode: SuiDisplayModes;
       displayMode: SuiDisplayModes;
       onDisplayModeSelect: (displayMode: SuiDisplayModes) => void;
     }
