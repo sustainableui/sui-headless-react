@@ -1,6 +1,6 @@
-interface GridCarbonIntensity {
+interface SuiGridCarbonIntensity {
   value: number;
   measurementRegion: string;
 }
 
-export default GridCarbonIntensity;
+export default SuiGridCarbonIntensity;

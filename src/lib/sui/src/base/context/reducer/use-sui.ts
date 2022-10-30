@@ -2,18 +2,13 @@ import { Dispatch, useCallback, useReducer } from 'react';
 import { SuiApi, SuiConfig, SuiCustomConfig, SuiDisplayModes, SuiGridCarbonIntensity } from '../../types';
 import { initialState as SUI_INITIAL_STATE } from '../../constants';
 import { Sui } from '../sui-context.types';
-import {
-  getLocalStorageDisplayMode,
-  getLocalStorageLocalizationTimestamp,
-  isDisplayModeStale,
-  setLocalStorageDisplayMode,
-  setLocalStorageLocalizationTimestamp,
-} from '../../utils';
-import getDisplayModeFromGridCarbonIntensity from '../../utils/getDisplayModeFromGridCarbonIntensity';
+import { getLocalStorageDisplayMode, getLocalStorageLocalizationTimestamp, isDisplayModeStale } from '../../utils';
 import useGridCarbonIntensity from './use-grid-carbon-intensity';
 import { SuiActions, SuiState } from './types';
 import { cancelLocalization, determineDisplayMode, selectDisplayMode, startLocalization } from './actions';
 import { isSuiDisplayMode, isValidTimestamp } from './use-sui.types';
+import selectDisplayModeLocalStorage from './actions/selectDisplayModeLocalStorage';
+import determineDisplayModeLocalStorage from './actions/determineDisplayModeLocalStorage';
 
 function suiReducer(state: SuiState, action: SuiActions): SuiState {
   switch (action.type) {
@@ -65,19 +60,15 @@ function useSuiReducerWithLocalStorage(
     function (action: SuiActions) {
       switch (action.type) {
         case 'determine-display-mode':
-          setLocalStorageDisplayMode(
-            state.config.localStorageId,
-            getDisplayModeFromGridCarbonIntensity(action.payload, state.config),
-          );
-          setLocalStorageLocalizationTimestamp(state.config.localStorageId);
+          determineDisplayModeLocalStorage(state, action.payload);
           break;
         case 'select-display-mode':
-          setLocalStorageDisplayMode(state.config.localStorageId, action.payload);
+          selectDisplayModeLocalStorage(state, action.payload);
           break;
         default:
       }
     },
-    [state.config],
+    [state],
   );
 
   const dispatchWithLocalStorage = useCallback(
