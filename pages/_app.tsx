@@ -1,10 +1,15 @@
 import { SuiProvider } from '../src/lib/sui';
+import Loader from '../src/components/loader';
+import Switch from '../src/components/switch';
 
-const SUI_API = '/api/grid-carbon-intensity';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <SuiProvider api={SUI_API}>
+    <SuiProvider api={process.env.NEXT_PUBLIC_SUI_API} LoaderComponent={Loader} SwitchComponent={Switch}>
       <Component {...pageProps} />
     </SuiProvider>
   );

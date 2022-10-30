@@ -1,6 +1,4 @@
 import React from 'react';
-import SuiLoader from '../sui-loader';
-import SuiSwitch from '../sui-switch';
 import useSui from '../../base/context/reducer';
 import { SuiContext } from '../../base/context/sui-context';
 import SuiDisplayModes from '../../base/types/suiDisplayModes';
@@ -18,20 +16,37 @@ const SUI_DEFAULT_CONFIG = {
   localStorageId: 'sui',
 };
 
-function SuiProvider({ api, config: customConfig, children }: SuiProviderProps) {
+function SuiProvider({
+  api,
+  LoaderComponent,
+  loaderComponentProps = {},
+  SwitchComponent,
+  switchComponentProps = {},
+  config: customConfig,
+  children,
+}: SuiProviderProps) {
   const sui = useSui(api, customConfig, SUI_DEFAULT_CONFIG);
+
+  const {
+    handlers: { onDisplayModeSelect, onLocalizationCancel },
+    state: { config },
+  } = sui;
+
+  const { userControlAllowed } = config;
 
   if (sui.state.isLoading) {
     return (
       <SuiContext.Provider value={sui}>
-        <SuiLoader />
+        <LoaderComponent {...loaderComponentProps} onLocalizationCancel={onLocalizationCancel} />
       </SuiContext.Provider>
     );
   }
 
   return (
     <SuiContext.Provider value={sui}>
-      <SuiSwitch />
+      {userControlAllowed ? (
+        <SwitchComponent {...switchComponentProps} onDisplayModeSelect={onDisplayModeSelect} />
+      ) : null}
       {children}
     </SuiContext.Provider>
   );
