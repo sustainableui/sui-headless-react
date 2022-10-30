@@ -5,10 +5,16 @@ import { Sui } from '../sui-context.types';
 import { getLocalStorageDisplayMode, getLocalStorageLocalizationTimestamp, isDisplayModeStale } from '../../utils';
 import useGridCarbonIntensity from './use-grid-carbon-intensity';
 import { SuiActions, SuiState } from './types';
-import { cancelLocalization, determineDisplayMode, selectDisplayMode, startLocalization } from './actions';
+import {
+  cancelLocalization,
+  cancelLocalizationLocalStorage,
+  determineDisplayMode,
+  determineDisplayModeLocalStorage,
+  selectDisplayMode,
+  selectDisplayModeLocalStorage,
+  startLocalization,
+} from './actions';
 import { isSuiDisplayMode, isValidTimestamp } from './use-sui.types';
-import selectDisplayModeLocalStorage from './actions/selectDisplayModeLocalStorage';
-import determineDisplayModeLocalStorage from './actions/determineDisplayModeLocalStorage';
 
 function suiReducer(state: SuiState, action: SuiActions): SuiState {
   switch (action.type) {
@@ -59,11 +65,14 @@ function useSuiReducerWithLocalStorage(
   const updateLocalStorage = useCallback(
     function (action: SuiActions) {
       switch (action.type) {
-        case 'determine-display-mode':
-          determineDisplayModeLocalStorage(state, action.payload);
-          break;
         case 'select-display-mode':
           selectDisplayModeLocalStorage(state, action.payload);
+          break;
+        case 'cancel-localization':
+          cancelLocalizationLocalStorage(state);
+          break;
+        case 'determine-display-mode':
+          determineDisplayModeLocalStorage(state, action.payload);
           break;
         default:
       }
