@@ -2,7 +2,7 @@ import React from 'react';
 import { SuiDisplayModes, SuiOptions } from '../../base/types';
 
 type SuiProviderProps = SuiOptions & {
-  LoaderComponent: React.ElementType<Record<string, unknown> & { onLocalizationCancel: () => void }>;
+  LoaderComponent: React.FC<Record<string, unknown> & { onLocalizationCancel: () => void }>;
   loaderComponentProps?: Record<string, unknown>;
   SwitchComponent: React.FC<
     Record<string, unknown> & {
