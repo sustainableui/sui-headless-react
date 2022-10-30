@@ -4,7 +4,7 @@ import { SuiDisplayModes, SuiOptions } from '../../base/types';
 type SuiProviderProps = SuiOptions & {
   LoaderComponent: React.FC<Record<string, unknown> & { onLocalizationCancel: () => void }>;
   loaderComponentProps?: Record<string, unknown>;
-  SwitchComponent: React.FC<
+  SwitchComponent?: React.FC<
     Record<string, unknown> & {
       displayMode: SuiDisplayModes;
       onDisplayModeSelect: (displayMode: SuiDisplayModes) => void;

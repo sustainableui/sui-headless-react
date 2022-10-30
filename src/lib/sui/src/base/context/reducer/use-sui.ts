@@ -25,7 +25,7 @@ function suiReducer(state: SuiState, action: SuiActions): SuiState {
 }
 
 function suiReducerInit(initialState: SuiState, customConfig: SuiCustomConfig, defaultConfig: SuiConfig): SuiState {
-  const config = {
+  const config: SuiConfig = {
     ...defaultConfig,
     ...customConfig,
   };

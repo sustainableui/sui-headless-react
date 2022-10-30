@@ -44,7 +44,7 @@ function SuiProvider({
 
   return (
     <SuiContext.Provider value={sui}>
-      {userControlAllowed ? (
+      {userControlAllowed && SwitchComponent ? (
         <SwitchComponent
           {...switchComponentProps}
           displayMode={displayMode}
