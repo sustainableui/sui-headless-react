@@ -1,5 +1,4 @@
 import { Button, ButtonGroup } from '@mui/material';
-import { useSuiContext } from '../../lib/sui/src/base/context/sui-context';
 import { SuiDisplayModes } from '../../lib/sui/src/base/types';
 
 function getColor(displayMode) {
@@ -15,13 +14,15 @@ function getColor(displayMode) {
   }
 }
 
-function Switch({ onDisplayModeSelect }) {
-  const sui = useSuiContext();
-  const { displayMode } = sui.state;
+interface SwitchProps {
+  displayMode: SuiDisplayModes;
+  onDisplayModeSelect: (newDisplayMode: SuiDisplayModes) => void;
+}
 
-  function handleClick(displayMode) {
+function Switch({ displayMode, onDisplayModeSelect }: SwitchProps) {
+  function handleClick(newDisplayMode: SuiDisplayModes) {
     return () => {
-      onDisplayModeSelect(displayMode);
+      onDisplayModeSelect(newDisplayMode);
     };
   }
 

@@ -1,7 +1,11 @@
 import { Alert, Button, CircularProgress, Container } from '@mui/material';
 import s from './loader.module.css';
 
-function Loader({ onLocalizationCancel }) {
+interface LoaderProps {
+  onLocalizationCancel: () => void;
+}
+
+function Loader({ onLocalizationCancel }: LoaderProps) {
   return (
     <Container className={s.container}>
       <CircularProgress className={s.circularProgress} color="success" size={100} />

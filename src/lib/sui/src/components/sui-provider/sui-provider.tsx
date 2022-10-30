@@ -29,7 +29,7 @@ function SuiProvider({
 
   const {
     handlers: { onDisplayModeSelect, onLocalizationCancel },
-    state: { config },
+    state: { config, displayMode },
   } = sui;
 
   const { userControlAllowed } = config;
@@ -45,7 +45,11 @@ function SuiProvider({
   return (
     <SuiContext.Provider value={sui}>
       {userControlAllowed ? (
-        <SwitchComponent {...switchComponentProps} onDisplayModeSelect={onDisplayModeSelect} />
+        <SwitchComponent
+          {...switchComponentProps}
+          displayMode={displayMode}
+          onDisplayModeSelect={onDisplayModeSelect}
+        />
       ) : null}
       {children}
     </SuiContext.Provider>
