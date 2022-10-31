@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@sustainableui/sui-headless-react",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "private": false,
   "main": "src/index.tsx",
   "description": "SUI Headless for React",
@@ -9,14 +9,15 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sustainableui/sui-headless-react.git"
+    "url": "https://github.com/sustainableui/sui-headless-react"
   },
   "bugs": {
     "url": "https://github.com/ /sui-headless-react/issues",
     "email": "sustainableui@gmail.com"
   },
   "scripts": {
-    "build": "npm pack"
+    "build": "npm pack",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@types/react": "18.0.23",
@@ -32,7 +33,8 @@
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "semantic-release": "^19.0.5"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -40,5 +42,11 @@
   },
   "files": [
     "src/**/*"
-  ]
+  ],
+  "release": {
+    "branches": ["main"]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
