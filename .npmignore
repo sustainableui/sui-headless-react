@@ -1,0 +1,10 @@
+dist
+.eslintignore
+.eslintrc
+.gitignore
+.prettierignore
+.prettierrc
+rollup.config.mjs
+tsconfig.json
+LICENSE
+README.md

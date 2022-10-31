@@ -1,5 +1,2 @@
-.cache
-public
-build
 **/node_modules/**
 dist

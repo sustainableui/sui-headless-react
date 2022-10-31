@@ -1,7 +1,16 @@
 {
+  "type": "commonjs",
   "name": "sui-headless-react",
   "version": "0.1.0",
   "private": false,
+  "main": "dist/index.js",
+  "description": "SUI Headless for React",
+  "author": "SUI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sustainableui/sui-headless-react.git"
+  },
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w"
