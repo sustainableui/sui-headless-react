@@ -5,11 +5,15 @@
   "private": false,
   "main": "dist/esm/index.jsx",
   "description": "SUI Headless for React",
-  "author": "SUI Team",
+  "author": "Sustainable UI",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/sustainableui/sui-headless-react.git"
+  },
+  "bugs": {
+    "url" : "https://github.com/sustainableui/sui-headless-react/issues",
+    "email" : "sustainableui@gmail.com"
   },
   "scripts": {
     "build": "rollup -c"
