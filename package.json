@@ -1,11 +1,9 @@
 {
-  "type": "commonjs",
+  "type": "module",
   "name": "sui-headless-react",
   "version": "0.1.0",
   "private": false,
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/esm/index.jsx",
   "description": "SUI Headless for React",
   "author": "SUI Team",
   "license": "MIT",
@@ -14,12 +12,11 @@
     "url": "https://github.com/sustainableui/sui-headless-react.git"
   },
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c -w"
+    "build": "rollup -c"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.2",
-    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-eslint": "^9.0.1",
     "@types/react": "18.0.23",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
@@ -29,7 +26,10 @@
     "babel-runtime": "^6.26.0",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
