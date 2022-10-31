@@ -10,11 +10,10 @@ export default {
       format: 'cjs',
       exports: 'named',
       sourcemap: true,
-      strict: false
+      strict: false,
     }
   ],
   plugins: [
-    sass({ insert: true }),
     typescript({ objectHashIgnoreUnknownHack: true })
   ],
   external: ['react', 'react-dom']
