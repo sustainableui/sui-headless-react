@@ -4,7 +4,5 @@ dist
 .gitignore
 .prettierignore
 .prettierrc
-rollup.config.mjs
 tsconfig.json
 LICENSE
-README.md

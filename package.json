@@ -1,9 +1,9 @@
 {
   "type": "module",
-  "name": "sui-headless-react",
+  "name": "@sustainableui/sui-headless-react",
   "version": "0.1.0",
   "private": false,
-  "main": "dist/esm/index.jsx",
+  "main": "src/index.tsx",
   "description": "SUI Headless for React",
   "author": "Sustainable UI",
   "license": "MIT",
@@ -12,22 +12,17 @@
     "url": "https://github.com/sustainableui/sui-headless-react.git"
   },
   "bugs": {
-    "url" : "https://github.com/sustainableui/sui-headless-react/issues",
-    "email" : "sustainableui@gmail.com"
+    "url": "https://github.com/ /sui-headless-react/issues",
+    "email": "sustainableui@gmail.com"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "npm pack"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.2",
-    "@rollup/plugin-eslint": "^9.0.1",
     "@types/react": "18.0.23",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
-    "acorn-jsx": "^5.3.2",
-    "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -37,10 +32,6 @@
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rollup": "^3.2.3",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.34.1",
     "typescript": "4.8.4"
   },
   "peerDependencies": {
@@ -48,6 +39,6 @@
     "react-dom": "^18.2.0"
   },
   "files": [
-    "dist"
+    "src/**/*"
   ]
 }
