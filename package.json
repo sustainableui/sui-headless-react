@@ -3,7 +3,9 @@
   "name": "sui-headless-react",
   "version": "0.1.0",
   "private": false,
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
   "description": "SUI Headless for React",
   "author": "SUI Team",
   "license": "MIT",
@@ -16,10 +18,13 @@
     "start": "rollup -c -w"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/react": "18.0.23",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
+    "acorn-jsx": "^5.3.2",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "eslint": "^8.26.0",
@@ -29,6 +34,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^3.2.3",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.34.1",
     "typescript": "4.8.4"
   },
@@ -36,5 +43,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }
