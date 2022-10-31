@@ -9,7 +9,6 @@
 /coverage
 
 # production
-/build
 /dist
 
 # misc
@@ -27,7 +26,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # jetbrains
 .idea
