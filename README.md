@@ -24,10 +24,10 @@ yarn add @sustainableui/sui-headless-react
 import React from 'react'
 import { SuiProvider } from '@sustainableui/sui-headless-react';
 
-function App({ children }) {
+function App() {
   return (
     <SuiProvider>
-      {children}
+      {/* { ...  } */}
     </SuiProvider>
   )
 }
