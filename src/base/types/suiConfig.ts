@@ -6,7 +6,6 @@ interface SuiConfig {
     [SuiDisplayModes.Moderate]: number;
     [SuiDisplayModes.High]: number;
   };
-  userControlAllowed: boolean;
   localizationTimeout: number;
   displayModeTimeout: number;
   localStorageId: string;

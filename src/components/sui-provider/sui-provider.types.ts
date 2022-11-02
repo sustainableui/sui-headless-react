@@ -4,7 +4,7 @@ import { SuiDisplayModes, SuiGridCarbonIntensity, SuiOptions } from '../../base/
 type SuiProviderProps = SuiOptions & {
   LoaderComponent: React.FC<Record<string, unknown> & { onLocalizationCancel: () => void }>;
   loaderComponentProps?: Record<string, unknown>;
-  SwitchComponent?: React.FC<
+  SwitchComponent: React.FC<
     Record<string, unknown> & {
       gridCarbonIntensity: SuiGridCarbonIntensity;
       recommendedDisplayMode: SuiDisplayModes;

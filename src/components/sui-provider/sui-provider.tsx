@@ -12,7 +12,6 @@ const SUI_DEFAULT_CONFIG = {
     [SuiDisplayModes.High]: 0,
   },
   localizationTimeout: 8000,
-  userControlAllowed: true,
   displayModeTimeout: 12000,
   localStorageId: 'sui',
 };
@@ -33,8 +32,6 @@ function SuiProvider({
     state: { config, displayMode, gridCarbonIntensity },
   } = sui;
 
-  const { userControlAllowed } = config;
-
   if (sui.state.isLoading) {
     return (
       <SuiContext.Provider value={sui}>
@@ -45,15 +42,13 @@ function SuiProvider({
 
   return (
     <SuiContext.Provider value={sui}>
-      {userControlAllowed && SwitchComponent ? (
-        <SwitchComponent
-          {...switchComponentProps}
-          recommendedDisplayMode={getDisplayModeFromGridCarbonIntensity(gridCarbonIntensity, config)}
-          gridCarbonIntensity={gridCarbonIntensity}
-          displayMode={displayMode}
-          onDisplayModeSelect={onDisplayModeSelect}
-        />
-      ) : null}
+      <SwitchComponent
+        {...switchComponentProps}
+        recommendedDisplayMode={getDisplayModeFromGridCarbonIntensity(gridCarbonIntensity, config)}
+        gridCarbonIntensity={gridCarbonIntensity}
+        displayMode={displayMode}
+        onDisplayModeSelect={onDisplayModeSelect}
+      />
       {children}
     </SuiContext.Provider>
   );
