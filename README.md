@@ -57,11 +57,11 @@ function App({ children }) {
 import React from 'react'
 import { withSui } from '@sustainableui/sui-headless-react';
 
-const LowCarbonComponent = React.lazy(() => import('./sui/LowBackgroundColor'))
+const LowCarbonComponent = React.lazy(() => import('./sui/LowCarbonComponent'))
 
-const ModerateCarbonComponent = React.lazy(() => import('./sui/ModerateBackgroundColor'))
+const ModerateCarbonComponent = React.lazy(() => import('./sui/ModerateCarbonComponent'))
 
-const HighCarbonComponent = React.lazy(() => import('./sui/HighBackgroundColor'))
+const HighCarbonComponent = React.lazy(() => import('./sui/HighCarbonComponent'))
 
 export default withSui([LowCarbonComponent, ModerateCarbonComponent, HighCarbonComponent])
 ```
