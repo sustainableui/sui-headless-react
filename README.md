@@ -21,7 +21,7 @@ yarn add @sustainableui/sui-headless-react
 1. Wrap root element of your application with `SuiProvider`
 
 ```jsx
-import { React } from 'react'
+import React from 'react'
 import { SuiProvider } from '@sustainableui/sui-headless-react';
 
 function App({ children }) {
@@ -54,7 +54,7 @@ function App({ children }) {
    - accepts an array of components
    - first component in the list is rendered when display mode is set to low, meaning grid carbon intensity is high at a user location, and vice-versa
 ```jsx
-import { React } from 'react'
+import React from 'react'
 import { withSui } from '@sustainableui/sui-headless-react';
 
 const LowCarbonComponent = React.lazy(() => import('./sui/LowBackgroundColor'))
