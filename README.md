@@ -50,7 +50,7 @@ function App() {
        - `displayMode` - currently selected display mode
        - `onDisplayModeSelect` - handler that shall be called when the user desires to change display mode
 
-3. Use `withSui` higher-order component (HOC) as a Graceful Degradation Function to provide automatic graceful degradation to your component
+3. Use `withSui` higher-order component (HOC) as a Graceful Degradation Function to provide automatic graceful degradation and user control to your component
    - accepts an array of components
    - first component in the list is rendered when display mode is set to low, meaning grid carbon intensity is high at a user location, and vice-versa
 ```jsx
