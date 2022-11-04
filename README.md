@@ -1,6 +1,6 @@
 # SUI Headless for React
 
-This library provides primitives for building carbon aware UIs to your React application.
+Library providing set of base primitives for building carbon aware UIs to your React application.
 
 ## Installation
 
@@ -68,4 +68,6 @@ export default withSui([LowCarbonComponent, ModerateCarbonComponent, HighCarbonC
 
 ## Examples
 
-We are working on these right now.
+- POC implementation of Carbon Aware UI primitives for React - Carbon Hack 22 demo
+  - NextJS, MUI, Vercel
+  - [https://github.com/sustainableui/ch22-sui-headless-react-demo](https://github.com/sustainableui/ch22-sui-headless-react-demo)
