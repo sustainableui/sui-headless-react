@@ -14,6 +14,6 @@
 
 ------
 
-![The Most Innovative](.github/assets/sui-the-most-innovative-award.png | width=250)
+<img alt="The Most Innovative" src=".github/assets/sui-the-most-innovative-award.png" width="490" height="275" style="max-width: 100%;">
 
-![Adora Foundation](.github/assets/sui-adora-foundation-partnership.png | width=250)
+<img alt="Adora Foundation" src=".github/assets/sui-adora-foundation-partnership.png" width="490" height="284" style="max-width: 100%;">
