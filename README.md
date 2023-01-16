@@ -3,7 +3,7 @@
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset=".github/assets/sui-logo-light.png">
       <source media="(prefers-color-scheme: light)" srcset=".github/assets/sui-logo-dark.png">
-      <img alt="Sustainable UI" src=".github/assets/sui-logo-light.png" width="200" height="200" style="max-width: 100%;">
+      <img alt="Sustainable UI" src=".github/assets/sui-logo-light.png" width="500" height="251" style="max-width: 100%;">
     </picture>
   </a>
 </p>
