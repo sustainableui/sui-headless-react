@@ -16,4 +16,13 @@
 
 ![The Most Innovative](.github/assets/sui-the-most-innovative-award.png)
 
-<img alt="Adora Foundation" src=".github/assets/sui-adora-foundation-partnership.jpeg" width="150" height="150" style="max-width: 100%;">
+
+<p align="center">
+  <a href="https://adorafoundation.org">
+    <img alt="Adora Foundation" src=".github/assets/sui-adora-foundation-partnership.jpeg" width="150" height="150" style="max-width: 100%;">
+  </a>
+</p>
+
+<p align="center">
+  Project Sustainable UI is supported by the Adora Foundation (<a href="https://adorafoundation.org">adorafoundation.org</a>) as part of its Incubation Lab
+</p>
