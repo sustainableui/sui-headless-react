@@ -1,62 +1,42 @@
 {
-  "type": "module",
   "name": "@sustainableui/sui-headless-react",
-  "version": "0.0.0-development",
-  "private": false,
-  "main": "src/index.tsx",
+  "version": "1.0.0",
   "description": "SUI Headless for React",
-  "author": "Sustainable UI",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sustainableui/sui-headless-react"
-  },
-  "bugs": {
-    "url": "https://github.com/sustainableui/sui-headless-react/issues",
-    "email": "sustainableui@gmail.com"
-  },
+  "main": "dist/cjs/index.js",
   "scripts": {
-    "build": "npm pack",
-    "semantic-release": "semantic-release"
+    "rollup": "rollup -c"
   },
+  "author": "Samuel Pitoňák",
+  "license": "MIT",
   "devDependencies": {
-    "@types/react": "18.0.23",
-    "@types/react-dom": "^18.0.8",
-    "@typescript-eslint/eslint-plugin": "^5.41.0",
-    "@typescript-eslint/parser": "^5.41.0",
-    "eslint": "^8.26.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.10",
-    "prettier": "^2.7.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "semantic-release": "^19.0.5",
-    "typescript": "4.8.4"
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/react": "^18.0.26",
+    "rollup": "^3.10.0",
+    "rollup-plugin-dts": "^5.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.4"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^4.8.4"
+    "react": "^18.2.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sustainableui/sui-headless-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sustainableui/sui-headless-react/issues"
+  },
+  "homepage": "https://github.com/sustainableui/sui-headless-react#readme",
+  "module": "dist/esm/index.js",
   "files": [
-    "src/**/*"
+    "dist"
   ],
-  "release": {
-    "branches": [
-      "main"
-    ]
-  },
+  "types": "dist/index.d.ts",
   "publishConfig": {
-    "access": "public"
-  },
-  "keywords": [
-    "sustainable",
-    "ui",
-    "sui",
-    "headless",
-    "react"
-  ]
+    "registry": "https://npm.pkg.github.com/sustainableui"
+  }
 }

@@ -1,8 +1,0 @@
-dist
-.eslintignore
-.eslintrc
-.gitignore
-.prettierignore
-.prettierrc
-tsconfig.json
-LICENSE
